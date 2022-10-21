@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DummyController;
 use App\Http\Controllers\BikeController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\CancionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,7 @@ Route::get('/', function() {
 });
 
 Route::resource('bike', BikeController::class);
+
+Route::resource('persona', PersonaController::class);
+
+Route::resource('cancion', CancionController::class);

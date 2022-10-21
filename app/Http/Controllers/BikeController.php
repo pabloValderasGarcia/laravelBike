@@ -14,7 +14,10 @@ class BikeController extends Controller
      */
     public function index()
     {
-        return view('bike.index');
+        $bikes = Bike::all();
+        // dd(['b', $bikes, 'a']);
+        return view('bike.index', ['activeBike' => 'active',
+                                   'bikes' => $bikes]);
     }
 
     /**
@@ -22,9 +25,10 @@ class BikeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Bike $bike)
     {
-        return view('bike.create');
+        return view('bike.create', ['activeBike' => 'active',
+                                  'bike' => $bike]);
     }
 
     /**
@@ -35,7 +39,9 @@ class BikeController extends Controller
      */
     public function store(Request $request)
     {
-        return view('bike.store');
+        $bike = new Bike($request->all());
+        $bike->save();
+        return redirect('bike');
     }
 
     /**
@@ -44,9 +50,10 @@ class BikeController extends Controller
      * @param  \App\Models\Bike  $bike
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bike $bike)
     {
-        return view('bike.show');
+        return view('bike.show', ['activeBike' => 'active',
+                                  'bike' => $bike]);
     }
 
     /**
@@ -55,9 +62,10 @@ class BikeController extends Controller
      * @param  \App\Models\Bike  $bike
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Bike $bike)
     {
-        return view('bike.edit');
+        return view('bike.edit', ['activeBike' => 'active',
+                                  'bike' => $bike]);
     }
 
     /**
@@ -67,9 +75,10 @@ class BikeController extends Controller
      * @param  \App\Models\Bike  $bike
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Bike $bike)
     {
-        return view('bike.update');
+        $bike->update($request->all());
+        return redirect('bike');
     }
 
     /**
@@ -78,8 +87,9 @@ class BikeController extends Controller
      * @param  \App\Models\Bike  $bike
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bike $bike)
     {
-        return view('bike.destroy');
+        $bike->delete();
+        return redirect('bike');
     }
 }

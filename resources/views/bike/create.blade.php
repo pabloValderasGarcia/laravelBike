@@ -1,43 +1,31 @@
-<!doctype html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Bikes</title>
-             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body style="margin: 0; font-family: Arial, Helvetica, sans-serif">
+@extends('bike.comun')
+
+@section('content')
         
-        <nav style="padding-top: 17px; background-color: rgb(48, 58, 64); width: 100%; height: 60px">
-            <a href="../" style="color: white; text-decoration: none; padding: 0 20px 0 18px; font-size: 19px">dwes</a>
-            <a href="../" style="color: white; text-decoration: none; padding: 0 10px 0 0; font-size: 16px">Home</a>
-            <a href="." style="color: white; text-decoration: none; font-size: 16px">Bike</a>
-        </nav>
+        <h1 style="padding: 12px 0 0 200px">Add bike</h1>
         
-        <div style="background-color: rgb(222, 224, 227)">
-            <p style="margin: 0; padding: 20px 0 70px 215px; font-size: 50px">Bikes</p>
-        </div>
-        
-        <h1 style="padding: 12px 0 0 200px">Añadir bike</h1>
-        
-        <div style="padding: 0 0 0 200px">
-            <label for="text">Nombre bike</label><br/>
-            <input id="text" name="text" type="text" placeholder="Nombre bike"><br/><br/>
-            <label for="desc">Precio bike</label><br/>
-            <input id="desc" name="desc" type="text" placeholder="Precio bike">
-        </div>
         <br/>
+        
         <div style="display: flex">
-            <form action="{{ url('bike') }}">
-                <input style="border-radius: 5px; font-size: 15px; 
-                margin-left: 200px; background-color: rgb(39, 179, 76); 
-                color: white; padding: 10px" type="submit" value="Volver"/>
-            </form>
-            
-            <form action="{{ url('bike') }}" method="post">
+            <form action="{{ url('bike/' . $bike->id) }}" method="post">
+                
                 @csrf
+                
+                <div style="padding: 0 0 0 200px">
+                    <label for="name">Bike name</label><br/>
+                    <input id="name" name="name" type="text" required minlength="3" maxlength="50" placeholder="Bike name">
+                </div>
+                
+                <br/>
+                
+                <a href="{{ url('bike') }}" style="border-radius: 5px; font-size: 15px; 
+                margin-left: 200px; background-color: rgb(39, 179, 76); 
+                color: white; padding: 10px">Back</a>
+                
                 <input style="border-radius: 5px; font-size: 15px; 
                 margin-left: 10px; background-color: rgb(39, 179, 76); 
-                color: white; padding: 10px" type="submit" value="Agregar"/>
+                color: white; padding: 10px" type="submit" value="Add"/>
+                
             </form>
         </div>
         
@@ -46,3 +34,5 @@
     
     </body>
 </html>
+
+@endsection
